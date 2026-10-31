@@ -1,0 +1,73 @@
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
+
+public class DiccionarioInglesEspañol {
+    public static void main(String[] args) {
+        // 1. Crear el diccionario Español-Inglés con al menos 20 palabras usando un HashMap
+        HashMap<String, String> diccionario = new HashMap<>();
+        diccionario.put("perro", "dog");
+        diccionario.put("gato", "cat");
+        diccionario.put("casa", "house");
+        diccionario.put("auto", "car");
+        diccionario.put("libro", "book");
+        diccionario.put("agua", "water");
+        diccionario.put("computadora", "computer");
+        diccionario.put("sol", "sun");
+        diccionario.put("luna", "moon");
+        diccionario.put("arbol", "tree");
+        diccionario.put("escuela", "school");
+        diccionario.put("manzana", "apple");
+        diccionario.put("rojo", "red");
+        diccionario.put("azul", "blue");
+        diccionario.put("feliz", "happy");
+        diccionario.put("triste", "sad");
+        diccionario.put("amigo", "friend");
+        diccionario.put("comida", "food");
+        diccionario.put("puerta", "door");
+        diccionario.put("ventana", "window");
+
+        // 2. Obtener todas las llaves (palabras en español) y mezclarlas para escoger 5 al azar
+        List<String> palabrasEspañol = new ArrayList<>(diccionario.keySet());
+        Collections.shuffle(palabrasEspañol);
+
+        // Tomar las primeras 5 palabras de la lista mezclada
+        List<String> seleccionadas = palabrasEspañol.subList(0, 5);
+
+        Scanner scanner = new Scanner(System.in);
+        int correctas = 0;
+        int incorrectas = 0;
+
+        System.out.println("=== JUEGO DE TRADUCCIÓN ESPAÑOL - INGLÉS ===");
+        System.out.println("Escribe la traducción en inglés para cada una de las siguientes palabras:\n");
+
+        // 3. Pedir al usuario la traducción y comprobar si son correctas
+        for (String palabraEspañol : seleccionadas) {
+            System.out.print("¿Cuál es la traducción al inglés de \"" + palabraEspañol + "\"? ");
+            String respuestaUsuario = scanner.nextLine().trim().toLowerCase();
+
+            // Obtener la traducción correcta del HashMap
+            String traduccionCorrecta = diccionario.get(palabraEspañol);
+
+            if (respuestaUsuario.equals(traduccionCorrecta)) {
+                System.out.println(" ¡Correcto!\n");
+                correctas++;
+            } else {
+                System.out.println(" ❌ Incorrecto. La respuesta correcta era: " + traduccionCorrecta + "\n");
+                incorrectas++;
+            }
+        }
+
+        scanner.close();
+
+        // 4. Mostrar el resultado final por consola
+        System.out.println("=================================");
+        System.out.println("           RESULTADOS            ");
+        System.out.println("=================================");
+        System.out.println("Respuestas correctas:   " + correctas);
+        System.out.println("Respuestas incorrectas: " + incorrectas);
+        System.out.println("=================================");
+    }
+}
